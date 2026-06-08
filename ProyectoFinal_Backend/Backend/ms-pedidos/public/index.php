@@ -2,9 +2,11 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../app/Middleware/CorsMiddleware.php';
+require_once __DIR__ . '/../app/Helpers/ResponseHelper.php';
 
 use Slim\Factory\AppFactory;
 use App\Middleware\CorsMiddleware;
+use App\Helpers\ResponseHelper;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -14,14 +16,9 @@ $app->add(new CorsMiddleware());
 $app->addBodyParsingMiddleware();
 
 $app->get('/health', function (Request $request, Response $response) {
-    $data = [
-        'status' => true,
-        'microservice' => 'ms-pedidos',
-        'message' => 'Microservicio de pedidos funcionando correctamente'
-    ];
-
-    $response->getBody()->write(json_encode($data));
-    return $response->withHeader('Content-Type', 'application/json');
+    return ResponseHelper::success($response, 'Microservicio de pedidos funcionando correctamente', [
+        'microservice' => 'ms-pedidos'
+    ]);
 });
 
 $app->run();
