@@ -8,6 +8,7 @@ require_once __DIR__ . '/../app/Models/Producto.php';
 require_once __DIR__ . '/../app/Helpers/ResponseHelper.php';
 require_once __DIR__ . '/../app/Middleware/CorsMiddleware.php';
 require_once __DIR__ . '/../app/Controllers/CategoriaController.php';
+require_once __DIR__ . '/../app/Controllers/ProductoController.php';
 
 use Slim\Factory\AppFactory;
 use App\Middleware\CorsMiddleware;
