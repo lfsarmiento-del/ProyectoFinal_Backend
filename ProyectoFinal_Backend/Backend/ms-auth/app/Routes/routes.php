@@ -1,8 +1,12 @@
 <?php
 
+use App\Controllers\AuthController;
 use App\Helpers\ResponseHelper;
+use App\Middleware\AuthMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+
+$authController = new AuthController();
 
 $app->get('/health', function (Request $request, Response $response) {
     return ResponseHelper::success($response, 'Microservicio de autenticacion funcionando correctamente', [
@@ -10,16 +14,10 @@ $app->get('/health', function (Request $request, Response $response) {
     ]);
 });
 
-$app->post('/login', function (Request $request, Response $response) {
-    return ResponseHelper::success($response, 'Ruta de login preparada para implementación', [
-        'endpoint' => '/login',
-        'method' => 'POST'
-    ]);
-});
+$app->post('/login', [$authController, 'login']);
 
-$app->post('/logout', function (Request $request, Response $response) {
-    return ResponseHelper::success($response, 'Ruta de logout preparada para implementación', [
-        'endpoint' => '/logout',
-        'method' => 'POST'
-    ]);
-});
+$app->post('/logout', [$authController, 'logout'])
+    ->add(new AuthMiddleware());
+
+$app->get('/validar-token', [$authController, 'validarToken'])
+    ->add(new AuthMiddleware());
