@@ -1,8 +1,13 @@
 <?php
 
 require __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../app/Middleware/CorsMiddleware.php';
+
+require_once __DIR__ . '/../app/Config/database.php';
+require_once __DIR__ . '/../app/Models/Categoria.php';
+require_once __DIR__ . '/../app/Models/Producto.php';
 require_once __DIR__ . '/../app/Helpers/ResponseHelper.php';
+require_once __DIR__ . '/../app/Middleware/CorsMiddleware.php';
+require_once __DIR__ . '/../app/Controllers/CategoriaController.php';
 
 use Slim\Factory\AppFactory;
 use App\Middleware\CorsMiddleware;

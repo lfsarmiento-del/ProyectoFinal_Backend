@@ -1,8 +1,11 @@
 <?php
 
+use App\Controllers\CategoriaController;
 use App\Helpers\ResponseHelper;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+
+$categoriaController = new CategoriaController();
 
 $app->get('/health', function (Request $request, Response $response) {
     return ResponseHelper::success($response, 'Microservicio de productos funcionando correctamente', [
@@ -10,23 +13,8 @@ $app->get('/health', function (Request $request, Response $response) {
     ]);
 });
 
-$app->get('/categorias', function (Request $request, Response $response) {
-    return ResponseHelper::success($response, 'Ruta para listar categorias preparada', [
-        'endpoint' => '/categorias',
-        'method' => 'GET'
-    ]);
-});
-
-$app->get('/productos', function (Request $request, Response $response) {
-    return ResponseHelper::success($response, 'Ruta para listar productos preparada', [
-        'endpoint' => '/productos',
-        'method' => 'GET'
-    ]);
-});
-
-$app->post('/productos', function (Request $request, Response $response) {
-    return ResponseHelper::success($response, 'Ruta para crear producto preparada', [
-        'endpoint' => '/productos',
-        'method' => 'POST'
-    ]);
-});
+$app->get('/categorias', [$categoriaController, 'listar']);
+$app->get('/categorias/{id}', [$categoriaController, 'obtener']);
+$app->post('/categorias', [$categoriaController, 'crear']);
+$app->put('/categorias/{id}', [$categoriaController, 'actualizar']);
+$app->delete('/categorias/{id}', [$categoriaController, 'eliminar']);
