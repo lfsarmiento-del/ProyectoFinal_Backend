@@ -6,19 +6,12 @@ require_once __DIR__ . '/../app/Helpers/ResponseHelper.php';
 
 use Slim\Factory\AppFactory;
 use App\Middleware\CorsMiddleware;
-use App\Helpers\ResponseHelper;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 
 $app = AppFactory::create();
 
 $app->add(new CorsMiddleware());
 $app->addBodyParsingMiddleware();
 
-$app->get('/health', function (Request $request, Response $response) {
-    return ResponseHelper::success($response, 'Microservicio de reservas y mesas funcionando correctamente', [
-        'microservice' => 'ms-reservas'
-    ]);
-});
+require_once __DIR__ . '/../app/Routes/routes.php';
 
 $app->run();
