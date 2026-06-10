@@ -19,3 +19,7 @@ $app->get('/pedidos/{id}', [$pedidoController, 'obtener']);
 $app->put('/pedidos/{id}', [$pedidoController, 'actualizar']);
 $app->patch('/pedidos/{id}/estado', [$pedidoController, 'cambiarEstado']);
 $app->delete('/pedidos/{id}', [$pedidoController, 'eliminar']);
+
+$app->post('/pedidos/{id}/detalles', [$pedidoController, 'agregarDetalle']);
+$app->put('/pedidos/{id}/detalles/{detalle_id}', [$pedidoController, 'actualizarDetalle']);
+$app->delete('/pedidos/{id}/detalles/{detalle_id}', [$pedidoController, 'eliminarDetalle']);

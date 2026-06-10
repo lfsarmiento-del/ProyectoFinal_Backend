@@ -17,6 +17,11 @@ class Pedido extends Model
         'estado'
     ];
 
+    protected $casts = [
+        'subtotal' => 'decimal:2',
+        'total' => 'decimal:2'
+    ];
+
     public function detalles()
     {
         return $this->hasMany(DetallePedido::class, 'pedido_id');
