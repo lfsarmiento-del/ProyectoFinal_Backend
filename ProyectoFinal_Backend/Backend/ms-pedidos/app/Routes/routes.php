@@ -5,6 +5,8 @@ use App\Helpers\ResponseHelper;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
+/** @var \Slim\App $app */
+
 $pedidoController = new PedidoController();
 
 $app->get('/health', function (Request $request, Response $response) {

@@ -6,6 +6,8 @@ use App\Middleware\AuthMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
+/** @var \Slim\App $app */
+
 $authController = new AuthController();
 
 $app->get('/health', function (Request $request, Response $response) {

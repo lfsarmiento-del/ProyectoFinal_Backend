@@ -6,6 +6,8 @@ use App\Helpers\ResponseHelper;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
+/** @var \Slim\App $app */
+
 $categoriaController = new CategoriaController();
 $productoController = new ProductoController();
 
