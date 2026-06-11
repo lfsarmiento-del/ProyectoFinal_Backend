@@ -17,7 +17,7 @@ class AuthController
         $contrasena = trim($data['contrasena'] ?? '');
 
         if ($usuarioInput === '' || $contrasena === '') {
-            return ResponseHelper::error($response, 'Usuario y contraseña son obligatorios.', 400);
+            return ResponseHelper::error($response, 'El usuario y la contraseña son obligatorios.', 400);
         }
 
         $usuario = Usuario::where('usuario', $usuarioInput)
@@ -25,7 +25,7 @@ class AuthController
             ->first();
 
         if (!$usuario) {
-            return ResponseHelper::error($response, 'Credenciales incorrectas.', 401);
+            return ResponseHelper::error($response, 'Las Credenciales son incorrectas.', 401);
         }
 
         if ($usuario->estado !== 'activo') {
@@ -33,7 +33,7 @@ class AuthController
         }
 
         if ($usuario->contrasena !== $contrasena) {
-            return ResponseHelper::error($response, 'Credenciales incorrectas.', 401);
+            return ResponseHelper::error($response, 'Las Credenciales son incorrectas.', 401);
         }
 
         $token = bin2hex(random_bytes(32));
@@ -42,7 +42,7 @@ class AuthController
         $usuario->sesion_activa = true;
         $usuario->save();
 
-        return ResponseHelper::success($response, 'Inicio de sesión correcto.', [
+        return ResponseHelper::success($response, 'El Inicio de sesion fue correcto.', [
             'token' => $token,
             'usuario' => [
                 'id' => $usuario->id,
@@ -71,7 +71,7 @@ class AuthController
         $usuario->sesion_activa = false;
         $usuario->save();
 
-        return ResponseHelper::success($response, 'Sesión cerrada correctamente.');
+        return ResponseHelper::success($response, 'La Sesión fue cerrada correctamente.');
     }
 
     public function validarToken(Request $request, Response $response): Response
@@ -88,7 +88,7 @@ class AuthController
             ->first();
 
         if (!$usuario) {
-            return ResponseHelper::error($response, 'Token inválido o sesión inactiva.', 401);
+            return ResponseHelper::error($response, 'Token invalido o sesión inactiva.', 401);
         }
 
         return ResponseHelper::success($response, 'Token válido.', [

@@ -30,7 +30,7 @@ class PedidoController
 
         $pedidos = $query->orderBy('id', 'desc')->get();
 
-        return ResponseHelper::success($response, 'Listado de pedidos obtenido correctamente.', [
+        return ResponseHelper::success($response, 'El listado de pedidos fue obtenido correctamente.', [
             'pedidos' => $pedidos->toArray()
         ]);
     }
@@ -45,7 +45,7 @@ class PedidoController
 
         $cantidadTotal = $pedido->detalles()->sum('cantidad');
 
-        return ResponseHelper::success($response, 'Pedido encontrado correctamente.', [
+        return ResponseHelper::success($response, 'El Pedido fue encontrado correctamente.', [
             'pedido' => $pedido->toArray(),
             'cantidad_total_productos' => (int) $cantidadTotal
         ]);
@@ -397,11 +397,11 @@ class PedidoController
         }
 
         if ($cantidad < 1) {
-            return 'La cantidad debe ser mayor o igual a uno.';
+            return 'La cantidad del producto debe ser mayor o igual a uno.';
         }
 
         if ($precioUnitario <= 0) {
-            return 'El precio unitario debe ser mayor a cero.';
+            return 'El precio unitario del producto debe ser mayor a cero.';
         }
 
         return true;

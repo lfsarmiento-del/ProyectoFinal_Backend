@@ -21,14 +21,14 @@ class AuthMiddleware
 
         if (!str_starts_with($authorizationHeader, 'Bearer ')) {
             $response = new SlimResponse();
-            return ResponseHelper::error($response, 'Formato de token inválido.', 401);
+            return ResponseHelper::error($response, 'El formato de token es inválido.', 401);
         }
 
         $token = trim(str_replace('Bearer ', '', $authorizationHeader));
 
         if ($token === '') {
             $response = new SlimResponse();
-            return ResponseHelper::error($response, 'Token vacío.', 401);
+            return ResponseHelper::error($response, 'El Token está vacío.', 401);
         }
 
         $usuario = Usuario::where('token', $token)
@@ -38,7 +38,7 @@ class AuthMiddleware
 
         if (!$usuario) {
             $response = new SlimResponse();
-            return ResponseHelper::error($response, 'Token inválido o sesión inactiva.', 401);
+            return ResponseHelper::error($response, 'El Token es inválido o la sesión está inactiva.', 401);
         }
 
         $request = $request->withAttribute('usuario_autenticado', $usuario);

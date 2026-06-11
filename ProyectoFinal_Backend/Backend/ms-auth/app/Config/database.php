@@ -5,7 +5,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 $envPath = __DIR__ . '/../../.env';
 
 if (!file_exists($envPath)) {
-    throw new Exception('No se encontró el archivo .env');
+    throw new Exception('No se encontro el archivo .env');
 }
 
 $env = parse_ini_file($envPath);
